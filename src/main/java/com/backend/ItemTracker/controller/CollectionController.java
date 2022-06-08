@@ -1,13 +1,16 @@
 package com.backend.ItemTracker.controller;
 
 import com.backend.ItemTracker.model.Collection;
+import com.backend.ItemTracker.model.Item;
 import com.backend.ItemTracker.service.CollectionService;
+import com.backend.ItemTracker.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.List;
 
 @CrossOrigin("*")
 @RestController
@@ -17,6 +20,12 @@ public class CollectionController {
     @Autowired
     public CollectionController(CollectionService collectionService){
         this.collectionService = collectionService;
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Collection>> getAllCollections(){
+        List<Collection> collectionList = collectionService.GetAll();
+        return ResponseEntity.ok(collectionList);
     }
 
     @GetMapping("/{id}")
@@ -35,6 +44,8 @@ public class CollectionController {
     @PutMapping("/{id}")
     public ResponseEntity updateCollection(@PathVariable Long id, @RequestBody Collection collection) {
         Collection currentCollection = collectionService.FindCollectionById(id);//.orElseThrow(RuntimeException::new);
+        currentCollection.setItems(collection.getItems());
+
 
         Collection updatedCollection = collectionService.Update(currentCollection);
 
@@ -47,4 +58,3 @@ public class CollectionController {
         return ResponseEntity.ok().build();
     }
 }
-
