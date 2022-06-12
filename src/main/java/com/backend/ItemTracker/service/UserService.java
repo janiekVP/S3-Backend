@@ -1,5 +1,6 @@
 package com.backend.ItemTracker.service;
 
+import com.backend.ItemTracker.model.Role;
 import com.backend.ItemTracker.model.User;
 import com.backend.ItemTracker.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +55,11 @@ public class UserService implements UserDetailsService {
 
     public User Create(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+        Role userRole = new Role();
+        userRole.setId(1);
+        user.setRole(userRole);
+
         User savedUser = userRepository.save(user);
         return savedUser;
     }
