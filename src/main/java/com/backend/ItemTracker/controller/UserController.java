@@ -2,7 +2,6 @@ package com.backend.ItemTracker.controller;
 
 import com.backend.ItemTracker.model.Role;
 import com.backend.ItemTracker.model.User;
-import com.backend.ItemTracker.repository.UserRepository;
 import com.backend.ItemTracker.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -49,7 +48,7 @@ public class UserController {
     @PutMapping("/{id}")
     public ResponseEntity updateUser(@PathVariable Long id, @RequestBody User user) {
         User currentUser = userService.FindUserById(id);//.orElseThrow(RuntimeException::new);
-        currentUser.setUserName(user.getUserName());
+        currentUser.setUsername(user.getUsername());
         currentUser.setEmail(user.getEmail());
         currentUser.setFavorite(user.getFavorite());
 

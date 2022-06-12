@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 
 @Getter
 @Setter
@@ -26,14 +27,19 @@ public class User {
     private Role role;
 
     @Column
-    private String userName;
+    private String username;
 
     @Column
     private String email;
+
+    @Column
+    private String password;
 
     @OneToOne
     @JoinColumn(name = "itemId", referencedColumnName = "id")
     @JsonIgnoreProperties("collections")
     private Item favorite;
 
+    public <E> User(String foo, String foo1, ArrayList<E> es) {
+    }
 }
