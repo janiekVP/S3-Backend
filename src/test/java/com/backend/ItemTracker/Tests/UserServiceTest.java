@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +22,8 @@ public class UserServiceTest {
     @BeforeEach
     void setup() throws Exception{
         this.mockRepo = new UserMockRepo();
-        this.userService = new UserService(mockRepo);
+        PasswordEncoder passwordEncoder = null;
+        this.userService = new UserService(mockRepo, passwordEncoder);
 
 
         List<User> users = new ArrayList<>();
@@ -40,7 +42,7 @@ public class UserServiceTest {
         User user1 = new User();
         user1.setId(1);
         user1.setRole(role1);
-        user1.setUserName("name1");
+        user1.setUsername("name1");
         user1.setEmail("email1@email.com");
         user1.setFavorite(item1);
 
@@ -51,7 +53,7 @@ public class UserServiceTest {
         User user2 = new User();
         user2.setId(2);
         user2.setRole(role1);
-        user2.setUserName("name2");
+        user2.setUsername("name2");
         user2.setEmail("email2@email.com");
         user2.setFavorite(item1);
 
@@ -62,7 +64,7 @@ public class UserServiceTest {
         User user3 = new User();
         user3.setId(3);
         user3.setRole(role1);
-        user3.setUserName("name3");
+        user3.setUsername("name3");
         user3.setEmail("email3@email.com");
         user3.setFavorite(item1);
 
@@ -77,7 +79,7 @@ public class UserServiceTest {
         long testId = 1;
         User user = userService.FindUserById(testId);
 
-        Assertions.assertEquals("name1",user.getUserName());
+        Assertions.assertEquals("name1",user.getUsername());
         Assertions.assertEquals("email1@email.com",user.getEmail());
         Assertions.assertEquals("User",user.getRole().getName());
         Assertions.assertEquals("sword",user.getFavorite().getName());
@@ -109,7 +111,7 @@ public class UserServiceTest {
         newUser.setId(4);
         newUser.setRole(role1);
         String userName = "test4";
-        newUser.setUserName(userName);
+        newUser.setUsername(userName);
         String email = "email4@email.com";
         newUser.setEmail(email);
         newUser.setFavorite(item1);
@@ -124,7 +126,7 @@ public class UserServiceTest {
         }
         //User updatedUser = mockRepo.users.get(2);
 
-        Assertions.assertEquals(userName, getNewUser.getUserName());
+        Assertions.assertEquals(userName, getNewUser.getUsername());
         Assertions.assertEquals(email, getNewUser.getEmail());
         Assertions.assertEquals(roleName, getNewUser.getRole().getName());
         Assertions.assertEquals(itemName, getNewUser.getFavorite().getName());
@@ -148,7 +150,7 @@ public class UserServiceTest {
         testUser.setId(2);
         testUser.setRole(role2);
         String userName = "test2";
-        testUser.setUserName(userName);
+        testUser.setUsername(userName);
         String email = "test2@email.com";
         testUser.setEmail(email);
         testUser.setFavorite(item2);
@@ -164,7 +166,7 @@ public class UserServiceTest {
         }
         //User updatedUser = mockRepo.users.get(2);
 
-        Assertions.assertEquals(userName, updatedUser.getUserName());
+        Assertions.assertEquals(userName, updatedUser.getUsername());
         Assertions.assertEquals(email, updatedUser.getEmail());
         Assertions.assertEquals(roleName, updatedUser.getRole().getName());
         Assertions.assertEquals(itemName, updatedUser.getFavorite().getName());

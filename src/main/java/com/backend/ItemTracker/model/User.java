@@ -26,10 +26,13 @@ public class User {
     private Role role;
 
     @Column
-    private String userName;
+    private String username;
 
     @Column
     private String email;
+
+    @Column
+    private String password;
 
     @OneToOne
     @JoinColumn(name = "itemId", referencedColumnName = "id")

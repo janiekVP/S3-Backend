@@ -177,4 +177,9 @@ public class UserMockRepo implements UserRepository {
     public <S extends User, R> R findBy(Example<S> example, Function<FluentQuery.FetchableFluentQuery<S>, R> queryFunction) {
         return null;
     }
+
+    @Override
+    public User findByUsername(String userName) {
+        return null;
+    }
 }
