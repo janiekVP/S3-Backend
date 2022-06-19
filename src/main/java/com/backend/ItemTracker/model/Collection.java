@@ -29,6 +29,7 @@ public class Collection {
             inverseJoinColumns = @JoinColumn(name = "itemId", referencedColumnName = "id"))
     private List<Item> items;
 
+
     @Column
     private String acquiredAt;
 }

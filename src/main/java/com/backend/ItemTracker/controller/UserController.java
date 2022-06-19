@@ -38,6 +38,10 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity createUser(@RequestBody User user) throws URISyntaxException {
+        Role userRole = new Role();
+        userRole.setId(1);
+        user.setRole(userRole);
+
         User savedUser = userService.Create(user);
         return ResponseEntity.created(new URI("/users/" + savedUser.getId())).body(savedUser);
     }

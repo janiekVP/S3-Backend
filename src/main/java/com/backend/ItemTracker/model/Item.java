@@ -1,5 +1,6 @@
 package com.backend.ItemTracker.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,5 +28,6 @@ public class Item {
     private String description;
 
     @ManyToMany(mappedBy = "items")
+    @JsonIgnoreProperties("items")
     private List<Collection> collections;
 }
